@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Arial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap" rel="stylesheet">
+    <!-- Add FontAwesome for the eye icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 1rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.89), rgba(0, 0, 0, 0.863), #6e502a), url(./Assets/images/giccl.png) no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 650px;
+            padding: 40px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            color: #1e3a5f; /* Dark Blue */
+            animation: slideIn 1s ease-out;
+            overflow: hidden;
+        }
+        .form-container .icon {
+            font-size: 60px;
+            color: #ffab40; /* Light Orange */
+            margin-bottom: 20px;
+            animation: bounceIn 1.2s ease;
+        }
+        .form-container .icon img {
+            width: 100px;
+        }
+        .form-container h2 {
+            font-size: 1.75rem;
+            font-weight: bold;
+            font-family: "Bruno Ace SC", serif;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .input-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .input-container input,
+        .input-container select {
+            width: 100%;
+            padding: 15px;
+            padding-left: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+        .input-container input:focus,
+        .input-container select:focus {
+            border-color: #ffab40; /* Light Orange */
+            box-shadow: 0 0 8px rgba(255, 171, 64, 0.5);
+            outline: none;
+            transform: scale(1.02);
+        }
+        .input-container .icon-symbol {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .form-row .input-container {
+            flex: 1;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 15px;
+            background-color: #d4882c; /* Light Orange */
+            border: none;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+        .form-container button:hover {
+            background-color: #aa6407; /* Darker Orange */
+            transform: scale(1.05);
+        }
+        .form-container a {
+            position: relative;
+            top: 10px;
+            font-size: 0.9rem;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .form-container a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes bounceIn {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Eye Icon Fix */
+        .input-container .toggle-password {
+            position: absolute;
+            top: 45%;
+            right: 15px;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #6c757d;
+            cursor: pointer;
+        }
+
+        /* Password Strength Indicator */
+        .password-strength {
+            width: 100%;
+            height: 7px;
+            margin-top: 5px;
+            background: #e0e0e0;
+            border-radius: 3px;
+        }
+        .password-strength div {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease-in-out; /* Smooth width transition */
+            width: 0%; /* Start with 0% width */
+        }
+        .strength-weak { background-color: red; }
+        .strength-medium { background-color: rgb(255, 136, 0); }
+        .strength-strong { background-color: green; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="icon"><img src="./Assets/images/logo.png" alt="Logo"></div>
+        <h2>Create Your Account</h2>
+        <p class="error-message"></p>
+        <form action="" method="POST">
+            <div class="input-container">
+                <input type="text" name="name" placeholder="Full Name" required>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <input type="text" name="father_name" placeholder="Father's Name" required>
+                </div>
+
+                <div class="input-container">
+                    <input type="text" name="cnic" placeholder="Student CNIC (Without Dashes)" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <input type="date" name="dob" required>
+                </div>
+
+                <div class="input-container">
+                    <input type="text" name="city" placeholder="City" required>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <input type="text" name="home_address" placeholder="Home Address" required>
+            </div>
+
+            <div class="input-container">
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="input-container">
+                <input type="password" name="password" id="password" placeholder="Password" required oninput="checkPasswordStrength()" maxlength="12">
+                <i id="toggle-password" class="toggle-password fas fa-eye-slash" onclick="togglePasswordVisibility('password', this)"></i>
+                <div id="password-strength" class="password-strength">
+                    <div id="strength-bar"></div>
+                </div>
+            </div>
+
+            <button type="submit">Create Account</button>
+            <p>
+                <a href="login.html">Already have an account? Log in here</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        function togglePasswordVisibility(inputId, eyeIcon) {
+            const passwordInput = document.getElementById(inputId);
+            const iconClass = eyeIcon.classList;
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                iconClass.remove("fa-eye-slash");
+                iconClass.add("fa-eye");
+            } else {
+                passwordInput.type = "password";
+                iconClass.remove("fa-eye");
+                iconClass.add("fa-eye-slash");
+            }
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthBar = document.getElementById('strength-bar');
+            let width = 0; // Initialize the width variable
+            let strengthClass = ''; // Initialize strength class
+
+            if (password.length <= 4) {
+                strengthClass = 'strength-weak';
+                width = 25; // Red
+            } else if (password.length <= 8) {
+                strengthClass = 'strength-medium';
+                width = 50; // Yellow
+            } else if (password.length <= 12) {
+                strengthClass = 'strength-strong';
+                width = 100; // Green
+            }
+
+            strengthBar.className = strengthClass;
+            strengthBar.style.width = `${width}%`;
+        }
+    </script>
+</body>
+</html>
